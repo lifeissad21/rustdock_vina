@@ -1,0 +1,13 @@
+[workspace]
+members = [
+    "crates/rustdock-vina-core",
+    "crates/rustdock-vina-cli",
+    "crates/rustdock-vina-benchmark",
+    "crates/rustdock-vina-split",
+]
+resolver = "2"
+
+[workspace.package]
+edition = "2021"
+license = "Apache-2.0"
+repository = "https://github.com/ccsb-scripps/AutoDock-Vina"

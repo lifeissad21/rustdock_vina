@@ -1,0 +1,95 @@
+{
+  "reference_version": "AutoDock Vina v1.2.7",
+  "seed": 42,
+  "cpu": 2,
+  "results": [
+    {
+      "case": "vina_score",
+      "official": -12.513,
+      "rust": -12.513,
+      "absolute_delta": 0.0,
+      "tolerance": 0.001,
+      "passed": true
+    },
+    {
+      "case": "vina_grid_score",
+      "official": -11.557,
+      "rust": -11.557,
+      "absolute_delta": 0.0,
+      "tolerance": 0.001,
+      "passed": true
+    },
+    {
+      "case": "vinardo_score",
+      "official": -9.18,
+      "rust": -9.18,
+      "absolute_delta": 0.0,
+      "tolerance": 0.001,
+      "passed": true
+    },
+    {
+      "case": "ad4_score",
+      "official": -14.375,
+      "rust": -14.375,
+      "absolute_delta": 0.0,
+      "tolerance": 0.001,
+      "passed": true
+    },
+    {
+      "case": "flexible_score",
+      "official": -4.275,
+      "rust": -4.275,
+      "absolute_delta": 0.0,
+      "tolerance": 0.001,
+      "passed": true
+    },
+    {
+      "case": "macrocycle_score",
+      "official": -7.628,
+      "rust": -7.628,
+      "absolute_delta": 0.0,
+      "tolerance": 0.001,
+      "passed": true
+    },
+    {
+      "case": "vina_local",
+      "official": -13.17,
+      "rust": -13.17,
+      "absolute_delta": 0.0,
+      "tolerance": 0.001,
+      "passed": true
+    },
+    {
+      "case": "vinardo_local",
+      "official": -9.839,
+      "rust": -9.839,
+      "absolute_delta": 0.0,
+      "tolerance": 0.001,
+      "passed": true
+    },
+    {
+      "case": "flexible_local",
+      "official": -8.807,
+      "rust": -8.807,
+      "absolute_delta": 0.0,
+      "tolerance": 0.001,
+      "passed": true
+    },
+    {
+      "case": "seeded_docking",
+      "official": -10.819,
+      "rust": -8.565,
+      "absolute_delta": 2.2540000000000013,
+      "tolerance": null,
+      "passed": true
+    },
+    {
+      "case": "full_docking",
+      "official": -13.237,
+      "rust": -13.183,
+      "absolute_delta": 0.05400000000000027,
+      "tolerance": null,
+      "passed": true
+    }
+  ]
+}

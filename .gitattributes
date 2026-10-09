@@ -1,0 +1,4 @@
+# Keep scientific fixtures and upstream formatting intact.
+reference/** -whitespace
+benchmark-100/prepared/** -whitespace
+*.map -diff

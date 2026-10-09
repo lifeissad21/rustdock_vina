@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rustdock-vina"
+version = "0.1.0"
+description = "Native Rust AutoDock Vina engine with a compatible Python API"
+requires-python = ">=3.9"
+dependencies = ["numpy"]
+license = {text = "Apache-2.0"}
+
+[tool.setuptools]
+packages = ["rustdock_vina"]
+
+[tool.setuptools.package-data]
+rustdock_vina = ["bin/*"]

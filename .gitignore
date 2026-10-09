@@ -1,0 +1,35 @@
+# Rust build artifacts
+/target/
+
+# Python environments and packaging
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+/python/build/
+/python/dist/
+/python/rustdock_vina/bin/
+.pytest_cache/
+.ruff_cache/
+
+# Local docking and benchmark outputs (prepared inputs stay versioned)
+/results/
+/benchmark-results*/
+/benchmark-100/results*/
+/benchmark-100/*-run/
+/*.pdbqt
+*.log
+
+# Local configuration and editor files
+.env
+.env.*
+!.env.example
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Upstream checkout metadata; vendor its source files, not its Git history
+/reference/.git/

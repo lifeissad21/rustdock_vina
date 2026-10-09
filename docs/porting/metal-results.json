@@ -1,0 +1,37 @@
+{
+  "exhaustiveness": 8,
+  "seed": 42,
+  "cpu": 8,
+  "results": {
+    "cpu": {
+      "wall_seconds": 34.1801876249956,
+      "best_affinity": -13.183,
+      "stdout": "RustDock Vina: vina, seed 42, CPU threads 8\nmode | affinity | rmsd l.b. | rmsd u.b.\n   1    -13.183      0.000      0.000\n   2    -11.197      2.997     12.427\n   3    -11.085      3.704     12.158\n",
+      "stderr": ""
+    },
+    "metal": {
+      "wall_seconds": 12.738610125001287,
+      "best_affinity": -13.299,
+      "stdout": "RustDock Vina: vina, seed 42, CPU threads 8\nMetal: \"Apple M3\", 4096 lanes \u00d7 46 steps, GPU search 10897.527333 ms; Rust refinement\nmode | affinity | rmsd l.b. | rmsd u.b.\n   1    -13.299      0.000      0.000\n   2    -12.794      0.767      1.142\n   3    -12.683      0.984      1.058\n",
+      "stderr": ""
+    },
+    "metal_repeat": {
+      "wall_seconds": 12.293690999998944,
+      "best_affinity": -13.299,
+      "stdout": "RustDock Vina: vina, seed 42, CPU threads 8\nMetal: \"Apple M3\", 4096 lanes \u00d7 46 steps, GPU search 11204.944083 ms; Rust refinement\nmode | affinity | rmsd l.b. | rmsd u.b.\n   1    -13.299      0.000      0.000\n   2    -12.794      0.767      1.142\n   3    -12.683      0.984      1.058\n",
+      "stderr": ""
+    },
+    "limited_cpu": {
+      "wall_seconds": 0.8205332910001744,
+      "best_affinity": -10.389,
+      "stdout": "RustDock Vina: vina, seed 42, CPU threads 8\nmode | affinity | rmsd l.b. | rmsd u.b.\n   1    -10.389      0.000      0.000\n",
+      "stderr": ""
+    },
+    "auto_fallback": {
+      "wall_seconds": 0.8725348340085475,
+      "best_affinity": -10.389,
+      "stdout": "RustDock Vina: vina, seed 42, CPU threads 8\nmode | affinity | rmsd l.b. | rmsd u.b.\n   1    -10.389      0.000      0.000\n",
+      "stderr": "Metal unavailable for this run; using CPU: Metal does not support --max_evals; use 0 or --metal off\n"
+    }
+  }
+}

@@ -1,0 +1,22 @@
+[package]
+name = "rustdock-vina-cli"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "vina"
+path = "src/main.rs"
+
+[dependencies]
+rustdock-vina-core = { path = "../rustdock-vina-core" }
+serde_json = "1.0"
+
+[[bin]]
+name = "rustdock-vina-server"
+path = "src/server.rs"
+
+
+[features]
+default = ["metal"]
+metal = []
