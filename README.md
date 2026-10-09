@@ -1,6 +1,30 @@
 # RustDock Vina
 
-Native Rust docking engine, CLI and Python interface based on the preserved AutoDock Vina source in `reference/`. Supports Vina, Vinardo and AutoDock4 scoring, PDBQT ligands and flexible residues, affinity maps, local optimization, CPU Monte Carlo docking and pose output. No official Vina executable is needed at runtime.
+Native Rust docking engine, CLI and Python interface based on the preserved AutoDock Vina source in `reference/`. Supports Vina, Vinardo and AutoDock4 scoring, PDBQT ligands and flexible residues, affinity maps, local optimization, CPU Monte Carlo docking and pose output. The docking engine runs independently of the official Vina executable; reference benchmarks use it for comparison.
+
+## Measured 100-case benchmark
+
+On the completed **2026-10-09 Apple M3 run**, Metal took **1.36× faster than official Vina by total wall time** (26.5% lower wall time) and was **1.40× faster than Rust CPU**. Rust CPU took 2.7% more total time than official Vina. Metal was faster than official Vina in 94 of 100 cases; Rust CPU was faster in 30.
+
+The run includes 100 prepared ligand cases across AMPC, CXCR4, GCR, HIVPR and HIVRT, with 20 cases per target and **300 successful docking runs**. Some cases are different conformers of the same compound. Settings: eight CPU threads, exhaustiveness 8, one returned pose, one trial per case/backend, paired seeds 20260717–20260816, automatic Metal controls. All backends generated maps from the same box; timings include process startup, map generation, search and final refinement.
+
+| Backend | Total time (s) | Mean / case (s) | Speedup vs Vina | Mean absolute affinity difference (kcal/mol) | Median pose RMSD (Å) |
+|---|---:|---:|---:|---:|---:|
+| Official Vina 1.2.7 | 814.28 | 8.14 | 1.00× | — | — |
+| Rust CPU | 835.95 | 8.36 | 0.97× | 0.062 | 0.118 |
+| Rust Metal | 598.87 | 5.99 | 1.36× | 0.104 | 0.178 |
+
+Speedup is the official-Vina total divided by the backend total, not the average of per-case ratios. Values above 1 mean faster. Affinity differences and RMSD compare each backend's best predicted pose with official Vina's best pose.
+
+![Mean docking time by target for official Vina, Rust CPU and Rust Metal](docs/benchmarks/2026-10-09/runtime.png)
+
+![Rust CPU and Metal best-pose affinities plotted against official Vina, with equality lines and mean absolute differences](docs/benchmarks/2026-10-09/affinity.png)
+
+![Cumulative pose RMSD distributions against official Vina: median 0.118 Angstrom for Rust CPU and 0.178 Angstrom for Metal](docs/benchmarks/2026-10-09/pose-rmsd.png)
+
+Mean absolute affinity differences were **0.062 kcal/mol for Rust CPU** and **0.104 kcal/mol for Metal**; the largest differences were 0.842 and 0.866 kcal/mol. Median pose differences were small, but maximum direct RMSD reached 7.04 Å and 7.83 Å respectively. These are comparisons with official predictions, not experimental affinity or crystal-pose accuracy. RMSD uses atom serials without alignment or symmetry correction.
+
+One trial per case and a fixed backend order do not establish repeated-run uncertainty or a universal speedup. GPU float32 search and different stochastic trajectories can produce different minima even with matching seeds. [Full report](docs/benchmarks/2026-10-09/REPORT.md), [300 measurements](docs/benchmarks/2026-10-09/results.csv), and [summary/provenance](docs/benchmarks/2026-10-09/summary.json) are included; raw logs and poses remain local.
 
 ## Build and run
 
@@ -91,4 +115,4 @@ When official Vina is selected with a receptor, all backends generate maps from 
 
 ## Repository contents
 
-Rust source, the Python frontend, prepared benchmark inputs, upstream reference fixtures and licenses are versioned. Build artifacts, environments, generated docking poses and benchmark runs are ignored and remain local. The reference snapshot is vendored as ordinary files; cloning requires no submodules. Recorded fixture measurements under `docs/porting/` are retained as historical evidence. Local experiment paths mentioned in port-status notes may be absent in a fresh clone.
+Rust source, the Python frontend, prepared benchmark inputs, upstream reference fixtures and licenses are versioned. Build artifacts, environments, generated docking poses and raw benchmark runs are ignored and remain local. Curated benchmark measurements and figures under `docs/benchmarks/` are versioned. The reference snapshot is vendored as ordinary files; cloning requires no submodules. Recorded fixture measurements under `docs/porting/` are retained as historical evidence. Local experiment paths mentioned in port-status notes may be absent in a fresh clone.
