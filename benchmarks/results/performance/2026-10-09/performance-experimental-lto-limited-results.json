@@ -1,0 +1,521 @@
+{
+  "platform": "macOS-26.7.1-arm64-arm-64bit-Mach-O",
+  "repeats": 7,
+  "binaries": {
+    "before": {
+      "path": "/private/tmp/rustdock-performance/vina-before",
+      "sha256": "3dac4c9f641afe8c0648a32319aacfaf82fe93d421e3e3797fff5262ffa95849"
+    },
+    "after": {
+      "path": "/private/tmp/rustdock-performance/vina-optimized",
+      "sha256": "017015ee8fd4338b17ee42726a6f1be2514d20976f358bd02b8a92c35706690f"
+    }
+  },
+  "results": [
+    {
+      "target": "ampc",
+      "ligand": "benchmark-100/prepared/ampc/ligands/01_308.pdbqt",
+      "workload": "map-preparation",
+      "arguments": [
+        "--receptor",
+        "benchmark-100/prepared/ampc/receptor.pdbqt",
+        "--ligand",
+        "benchmark-100/prepared/ampc/ligands/01_308.pdbqt",
+        "--config",
+        "benchmark-100/prepared/ampc/receptor.box.txt",
+        "--metal",
+        "off",
+        "--cpu",
+        "1",
+        "--seed",
+        "42",
+        "--verbosity",
+        "0",
+        "--out",
+        "/var/folders/j2/03fywg0x1qbbz5drcq46s8d80000gn/T/tmppk2e1jf3/pose.pdbqt",
+        "--randomize_only"
+      ],
+      "seconds": {
+        "before": [
+          0.46859691600184306,
+          0.4617885000006936,
+          0.46161887500056764,
+          0.46089554199716076,
+          0.4645515419979347,
+          0.46405124999728287,
+          0.4605833750028978
+        ],
+        "after": [
+          0.45061054100006004,
+          0.44789254200077266,
+          0.45544641699962085,
+          0.4478901250004128,
+          0.4509081249998417,
+          0.4484839579999971,
+          0.46118275000117137
+        ]
+      },
+      "before_median": 0.4617885000006936,
+      "after_median": 0.45061054100006004,
+      "speedup": 1.0248062528138508,
+      "output_sha256": "53611f0f3badda42ad596ee32e14c2917db530fc01872a49f91e0efabca9cc69"
+    },
+    {
+      "target": "ampc",
+      "ligand": "benchmark-100/prepared/ampc/ligands/01_308.pdbqt",
+      "workload": "limited-docking",
+      "arguments": [
+        "--receptor",
+        "benchmark-100/prepared/ampc/receptor.pdbqt",
+        "--ligand",
+        "benchmark-100/prepared/ampc/ligands/01_308.pdbqt",
+        "--config",
+        "benchmark-100/prepared/ampc/receptor.box.txt",
+        "--metal",
+        "off",
+        "--cpu",
+        "1",
+        "--seed",
+        "42",
+        "--verbosity",
+        "0",
+        "--out",
+        "/var/folders/j2/03fywg0x1qbbz5drcq46s8d80000gn/T/tmppk2e1jf3/pose.pdbqt",
+        "--exhaustiveness",
+        "1",
+        "--num_modes",
+        "3",
+        "--max_evals",
+        "2000"
+      ],
+      "seconds": {
+        "before": [
+          0.47453670799950487,
+          0.466452874999959,
+          0.474073084002157,
+          0.46708241700252984,
+          0.461875749999308,
+          0.46381258300243644,
+          0.4798140829989279
+        ],
+        "after": [
+          0.45696912499988684,
+          0.4526554160001979,
+          0.4534464999996999,
+          0.45210450000013225,
+          0.4520379999994475,
+          0.45573770799819613,
+          0.4590558329982741
+        ]
+      },
+      "before_median": 0.46708241700252984,
+      "after_median": 0.4534464999996999,
+      "speedup": 1.030071721808061,
+      "output_sha256": "2ac204d7180daa0ebeb914cdbff47252bcb61c55b7fe66ab440e3096323f7a14"
+    },
+    {
+      "target": "cxcr4",
+      "ligand": "benchmark-100/prepared/cxcr4/ligands/01_CHEMBL1089844.pdbqt",
+      "workload": "map-preparation",
+      "arguments": [
+        "--receptor",
+        "benchmark-100/prepared/cxcr4/receptor.pdbqt",
+        "--ligand",
+        "benchmark-100/prepared/cxcr4/ligands/01_CHEMBL1089844.pdbqt",
+        "--config",
+        "benchmark-100/prepared/cxcr4/receptor.box.txt",
+        "--metal",
+        "off",
+        "--cpu",
+        "1",
+        "--seed",
+        "42",
+        "--verbosity",
+        "0",
+        "--out",
+        "/var/folders/j2/03fywg0x1qbbz5drcq46s8d80000gn/T/tmppk2e1jf3/pose.pdbqt",
+        "--randomize_only"
+      ],
+      "seconds": {
+        "before": [
+          0.6368615409992344,
+          0.6314858330006246,
+          0.6384175409984891,
+          0.6388021660022787,
+          0.6303588750015479,
+          0.6519588339979236,
+          0.6270010830012325
+        ],
+        "after": [
+          0.6308882499979518,
+          0.6149356669993722,
+          0.6088282909986447,
+          0.6157330830028513,
+          0.6145429169991985,
+          0.6247615000029327,
+          0.6183039999996254
+        ]
+      },
+      "before_median": 0.6368615409992344,
+      "after_median": 0.6157330830028513,
+      "speedup": 1.0343143134251327,
+      "output_sha256": "acfe29f43c6768534585e154f43eb8ef9a91de8bec734f25b9036fbcbaae3bc5"
+    },
+    {
+      "target": "cxcr4",
+      "ligand": "benchmark-100/prepared/cxcr4/ligands/01_CHEMBL1089844.pdbqt",
+      "workload": "limited-docking",
+      "arguments": [
+        "--receptor",
+        "benchmark-100/prepared/cxcr4/receptor.pdbqt",
+        "--ligand",
+        "benchmark-100/prepared/cxcr4/ligands/01_CHEMBL1089844.pdbqt",
+        "--config",
+        "benchmark-100/prepared/cxcr4/receptor.box.txt",
+        "--metal",
+        "off",
+        "--cpu",
+        "1",
+        "--seed",
+        "42",
+        "--verbosity",
+        "0",
+        "--out",
+        "/var/folders/j2/03fywg0x1qbbz5drcq46s8d80000gn/T/tmppk2e1jf3/pose.pdbqt",
+        "--exhaustiveness",
+        "1",
+        "--num_modes",
+        "3",
+        "--max_evals",
+        "2000"
+      ],
+      "seconds": {
+        "before": [
+          0.6357920830014336,
+          0.6482762090017786,
+          0.6417161249992205,
+          0.6464451250030834,
+          0.6416004999991856,
+          0.633839916998113,
+          0.6423452079980052
+        ],
+        "after": [
+          0.6225085000005492,
+          0.6225216249986261,
+          0.6245393339995644,
+          0.6228934170030698,
+          0.6216045000001031,
+          0.6223531249997905,
+          0.6277908329975617
+        ]
+      },
+      "before_median": 0.6417161249992205,
+      "after_median": 0.6225216249986261,
+      "speedup": 1.0308334670311843,
+      "output_sha256": "82abaa4daf78629ef29de3cb6543b14ab01f56b8dc22df3129112e974adfe3c3"
+    },
+    {
+      "target": "gcr",
+      "ligand": "benchmark-100/prepared/gcr/ligands/01_CHEMBL436848.pdbqt",
+      "workload": "map-preparation",
+      "arguments": [
+        "--receptor",
+        "benchmark-100/prepared/gcr/receptor.pdbqt",
+        "--ligand",
+        "benchmark-100/prepared/gcr/ligands/01_CHEMBL436848.pdbqt",
+        "--config",
+        "benchmark-100/prepared/gcr/receptor.box.txt",
+        "--metal",
+        "off",
+        "--cpu",
+        "1",
+        "--seed",
+        "42",
+        "--verbosity",
+        "0",
+        "--out",
+        "/var/folders/j2/03fywg0x1qbbz5drcq46s8d80000gn/T/tmppk2e1jf3/pose.pdbqt",
+        "--randomize_only"
+      ],
+      "seconds": {
+        "before": [
+          0.7133270000012999,
+          0.711558208000497,
+          0.7027850839986058,
+          0.7086102920002304,
+          0.7203706250002142,
+          0.7117362919998413,
+          0.7310819590020401
+        ],
+        "after": [
+          0.6836407499977213,
+          0.6801306659981492,
+          0.6905239169973356,
+          0.6946362499984389,
+          0.6806967499978782,
+          0.684837458000402,
+          0.6916684579991852
+        ]
+      },
+      "before_median": 0.7117362919998413,
+      "after_median": 0.684837458000402,
+      "speedup": 1.039277690910744,
+      "output_sha256": "14566a4051ecf4a34b9d59d59c51244e1eb149af0abe16c7de40998ae9eeba11"
+    },
+    {
+      "target": "gcr",
+      "ligand": "benchmark-100/prepared/gcr/ligands/01_CHEMBL436848.pdbqt",
+      "workload": "limited-docking",
+      "arguments": [
+        "--receptor",
+        "benchmark-100/prepared/gcr/receptor.pdbqt",
+        "--ligand",
+        "benchmark-100/prepared/gcr/ligands/01_CHEMBL436848.pdbqt",
+        "--config",
+        "benchmark-100/prepared/gcr/receptor.box.txt",
+        "--metal",
+        "off",
+        "--cpu",
+        "1",
+        "--seed",
+        "42",
+        "--verbosity",
+        "0",
+        "--out",
+        "/var/folders/j2/03fywg0x1qbbz5drcq46s8d80000gn/T/tmppk2e1jf3/pose.pdbqt",
+        "--exhaustiveness",
+        "1",
+        "--num_modes",
+        "3",
+        "--max_evals",
+        "2000"
+      ],
+      "seconds": {
+        "before": [
+          0.7195337909979571,
+          0.7228596249988186,
+          0.7230872920008551,
+          0.7193399999996473,
+          0.7245268340011535,
+          0.7389775000010559,
+          0.7822804579991498
+        ],
+        "after": [
+          0.6980637919987203,
+          0.6982072499995411,
+          0.7014462090010056,
+          0.6961460409984284,
+          0.696217083997908,
+          0.709252042001026,
+          0.7004914999997709
+        ]
+      },
+      "before_median": 0.7230872920008551,
+      "after_median": 0.6982072499995411,
+      "speedup": 1.0356341788220194,
+      "output_sha256": "7b0953df679373613bc05ce34185d57d33fb9447aa02dc90ab1989088968587a"
+    },
+    {
+      "target": "hivpr",
+      "ligand": "benchmark-100/prepared/hivpr/ligands/01_CHEMBL171551.pdbqt",
+      "workload": "map-preparation",
+      "arguments": [
+        "--receptor",
+        "benchmark-100/prepared/hivpr/receptor.pdbqt",
+        "--ligand",
+        "benchmark-100/prepared/hivpr/ligands/01_CHEMBL171551.pdbqt",
+        "--config",
+        "benchmark-100/prepared/hivpr/receptor.box.txt",
+        "--metal",
+        "off",
+        "--cpu",
+        "1",
+        "--seed",
+        "42",
+        "--verbosity",
+        "0",
+        "--out",
+        "/var/folders/j2/03fywg0x1qbbz5drcq46s8d80000gn/T/tmppk2e1jf3/pose.pdbqt",
+        "--randomize_only"
+      ],
+      "seconds": {
+        "before": [
+          0.631165292001242,
+          0.6369449580015498,
+          0.6390432080006576,
+          0.6407151659986994,
+          0.6299201670008188,
+          0.6351294579981186,
+          0.6499113749996468
+        ],
+        "after": [
+          0.6275640829990152,
+          0.6263717500005441,
+          0.6192582080002467,
+          0.6223352499982866,
+          0.6343536249987665,
+          0.6213639999987208,
+          0.6260204169993813
+        ]
+      },
+      "before_median": 0.6369449580015498,
+      "after_median": 0.6260204169993813,
+      "speedup": 1.017450774296678,
+      "output_sha256": "346cc2174ce453df16eb63d286817d76a9b9e7d1e79dd42d6594f15ae2edb5e0"
+    },
+    {
+      "target": "hivpr",
+      "ligand": "benchmark-100/prepared/hivpr/ligands/01_CHEMBL171551.pdbqt",
+      "workload": "limited-docking",
+      "arguments": [
+        "--receptor",
+        "benchmark-100/prepared/hivpr/receptor.pdbqt",
+        "--ligand",
+        "benchmark-100/prepared/hivpr/ligands/01_CHEMBL171551.pdbqt",
+        "--config",
+        "benchmark-100/prepared/hivpr/receptor.box.txt",
+        "--metal",
+        "off",
+        "--cpu",
+        "1",
+        "--seed",
+        "42",
+        "--verbosity",
+        "0",
+        "--out",
+        "/var/folders/j2/03fywg0x1qbbz5drcq46s8d80000gn/T/tmppk2e1jf3/pose.pdbqt",
+        "--exhaustiveness",
+        "1",
+        "--num_modes",
+        "3",
+        "--max_evals",
+        "2000"
+      ],
+      "seconds": {
+        "before": [
+          0.6440531250009371,
+          0.6621247920011228,
+          1.2027605830007815,
+          0.6701292500001728,
+          0.6358271250028338,
+          0.6344441670007654,
+          0.633515791996615
+        ],
+        "after": [
+          0.6265730419981992,
+          0.6196670409990475,
+          1.0263001669991354,
+          0.99429925000004,
+          0.6280172080005286,
+          0.6328355000005104,
+          0.6194753750023665
+        ]
+      },
+      "before_median": 0.6440531250009371,
+      "after_median": 0.6280172080005286,
+      "speedup": 1.0255342000125496,
+      "output_sha256": "c82ed631d9eb7506cbc5a2461ee002c71cc246ca141499d66730a0bc89d1f53c"
+    },
+    {
+      "target": "hivrt",
+      "ligand": "benchmark-100/prepared/hivrt/ligands/01_CHEMBL262184.pdbqt",
+      "workload": "map-preparation",
+      "arguments": [
+        "--receptor",
+        "benchmark-100/prepared/hivrt/receptor.pdbqt",
+        "--ligand",
+        "benchmark-100/prepared/hivrt/ligands/01_CHEMBL262184.pdbqt",
+        "--config",
+        "benchmark-100/prepared/hivrt/receptor.box.txt",
+        "--metal",
+        "off",
+        "--cpu",
+        "1",
+        "--seed",
+        "42",
+        "--verbosity",
+        "0",
+        "--out",
+        "/var/folders/j2/03fywg0x1qbbz5drcq46s8d80000gn/T/tmppk2e1jf3/pose.pdbqt",
+        "--randomize_only"
+      ],
+      "seconds": {
+        "before": [
+          0.806406749998132,
+          0.7892418330011424,
+          0.7764937910033041,
+          0.782232292000117,
+          0.7825549589979346,
+          0.7894899159982742,
+          0.7904926250012068
+        ],
+        "after": [
+          0.7509329999993497,
+          0.7599025420022372,
+          0.7491883749971748,
+          0.7626656659995206,
+          0.7459248329978436,
+          0.7480930839992652,
+          0.7627482089992554
+        ]
+      },
+      "before_median": 0.7892418330011424,
+      "after_median": 0.7509329999993497,
+      "speedup": 1.0510149813656156,
+      "output_sha256": "837af0deba67fdd991da4a4b894ca5a5bf5bddfc2945cd336dc78d0dc7084847"
+    },
+    {
+      "target": "hivrt",
+      "ligand": "benchmark-100/prepared/hivrt/ligands/01_CHEMBL262184.pdbqt",
+      "workload": "limited-docking",
+      "arguments": [
+        "--receptor",
+        "benchmark-100/prepared/hivrt/receptor.pdbqt",
+        "--ligand",
+        "benchmark-100/prepared/hivrt/ligands/01_CHEMBL262184.pdbqt",
+        "--config",
+        "benchmark-100/prepared/hivrt/receptor.box.txt",
+        "--metal",
+        "off",
+        "--cpu",
+        "1",
+        "--seed",
+        "42",
+        "--verbosity",
+        "0",
+        "--out",
+        "/var/folders/j2/03fywg0x1qbbz5drcq46s8d80000gn/T/tmppk2e1jf3/pose.pdbqt",
+        "--exhaustiveness",
+        "1",
+        "--num_modes",
+        "3",
+        "--max_evals",
+        "2000"
+      ],
+      "seconds": {
+        "before": [
+          0.8130100419984956,
+          0.8163234579988057,
+          0.8228373750025639,
+          0.8061032500008878,
+          0.8222961250030494,
+          0.8984903749988007,
+          0.806617375001224
+        ],
+        "after": [
+          0.7975207499985117,
+          0.7819154999997409,
+          0.7912777090023155,
+          0.7716691249988799,
+          0.7942566249985248,
+          0.8003700000008394,
+          0.7788107079977635
+        ]
+      },
+      "before_median": 0.8163234579988057,
+      "after_median": 0.7912777090023155,
+      "speedup": 1.0316522868160525,
+      "output_sha256": "69cfe2a460e79b9b9c9d073cc7eeced7ecefdfd4322a5e6009bb6c0fc242e485"
+    }
+  ]
+}

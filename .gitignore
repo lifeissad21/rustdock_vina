@@ -14,10 +14,9 @@ __pycache__/
 .ruff_cache/
 
 # Local docking and benchmark outputs (prepared inputs stay versioned)
+/outputs/
 /results/
 /benchmark-results*/
-/benchmark-100/results*/
-/benchmark-100/*-run/
 /*.pdbqt
 *.log
 
@@ -33,3 +32,6 @@ __pycache__/
 
 # Upstream checkout metadata; vendor its source files, not its Git history
 /reference/.git/
+
+# Benchmark raw runs; curated results remain versioned
+/benchmarks/runs/

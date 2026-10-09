@@ -53,7 +53,7 @@ These are observations on one Mac and one run per case, with no repeated-run con
 Run from the repository root with a compatible Mac and an official Vina binary:
 
 ```sh
-./tools/run-benchmark-100.sh \
+./benchmarks/scripts/run-benchmark-100.sh \
   --reference-vina /path/to/official/vina \
   --cpu 8 --exhaustiveness 8 --num_modes 1 --seed 20260717 --trials 1
 ```
@@ -61,8 +61,8 @@ Run from the repository root with a compatible Mac and an official Vina binary:
 The publication script validates this protocol and the recorded Apple M3 GPU logs, exports portable CSV/JSON, and regenerates the figures. Its snapshot metadata describes this publication; it is not a generic hardware inventory collector.
 
 ```sh
-uv run --no-project --with matplotlib python tools/publish-benchmark.py \
-  benchmark-100/results/run-20261009-125526-42917 docs/benchmarks/2026-10-09
+uv run --no-project --with matplotlib python benchmarks/scripts/publish-benchmark.py \
+  benchmarks/runs/100-case/run-20261009-125526-42917 benchmarks/results/100-case/2026-10-09
 ```
 
 The ignored raw source directory remains local. [CSV](results.csv) contains all 300 measurements. [JSON](summary.json) contains aggregate metrics, protocol, limitations and SHA-256 digests of the source summaries. Personal absolute paths and raw logs are excluded from these published artifacts.

@@ -15,7 +15,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 MODES = ["vina", "off", "on"]
 LABELS = {"vina": "Official Vina 1.2.7", "off": "Rust CPU", "on": "Rust Metal"}
 COLORS = {"vina": "#64748b", "off": "#2563eb", "on": "#0d9488"}
@@ -41,7 +41,9 @@ def first_pose(path):
 
 
 def validate(run):
-    manifest = json.loads((ROOT / "benchmark-100/manifest.json").read_text())
+    manifest = json.loads(
+        (ROOT / "benchmarks/datasets/dude-100/manifest.json").read_text()
+    )
     cases = manifest["cases"]
     assert len(cases) == 100
     summaries = sorted(run.glob("case-*/summary.json"))
@@ -62,7 +64,13 @@ def validate(run):
             "ligand": case["pdbqt"],
             "receptor": case["receptor"],
         }.items():
-            assert settings[key] == [expected], f"Unexpected {key}: {path}"
+            actual = [
+                v.replace(
+                    "benchmark-100/prepared/", "benchmarks/datasets/dude-100/prepared/"
+                )
+                for v in settings[key]
+            ]
+            assert actual == [expected], f"Unexpected {key}: {path}"
         assert not set(settings).intersection(
             {
                 "lanes",
@@ -109,7 +117,12 @@ def validate(run):
                     assert math.isclose(
                         record[key], calculated, rel_tol=1e-9, abs_tol=1e-9
                     ), f"Metric mismatch: {path} {key}"
-            args = record["command_args"]
+            args = [
+                v.replace(
+                    "benchmark-100/prepared/", "benchmarks/datasets/dude-100/prepared/"
+                )
+                for v in record["command_args"]
+            ]
             assert "--maps" not in args
             assert args[args.index("--receptor") + 1] == case["receptor"]
             assert args[args.index("--ligand") + 1] == case["pdbqt"]
@@ -299,7 +312,7 @@ def figures(rows, targets, out):
 def main():
     if len(sys.argv) != 3:
         raise SystemExit(
-            "Usage: uv run --no-project --with matplotlib python tools/publish-benchmark.py RUN_DIR OUTPUT_DIR"
+            "Usage: uv run --no-project --with matplotlib python benchmarks/scripts/publish-benchmark.py RUN_DIR OUTPUT_DIR"
         )
     run, out = Path(sys.argv[1]), Path(sys.argv[2])
     manifest, rows, digests = validate(run)

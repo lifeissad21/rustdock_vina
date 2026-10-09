@@ -12,13 +12,13 @@ For your own pair, pass regular CLI inputs (`--receptor`, `--ligand`, `--config`
 The included dataset can be run from the repository root:
 
 ```sh
-./tools/run-benchmark-100.sh --check
-./tools/run-benchmark-100.sh --limit 3 --benchmark-dir benchmark-100/trial-run
-./tools/run-benchmark-100.sh
-./tools/run-benchmark-100.sh --trials 5 --benchmark-dir benchmark-100/repeated-run
+./benchmarks/scripts/run-benchmark-100.sh --check
+./benchmarks/scripts/run-benchmark-100.sh --limit 3 --benchmark-dir benchmarks/runs/trial-run
+./benchmarks/scripts/run-benchmark-100.sh
+./benchmarks/scripts/run-benchmark-100.sh --trials 5 --benchmark-dir benchmarks/runs/repeated-run
 ```
 
-The script builds the release binary and selects the manifest, one trial per case/backend, and a fresh dated directory under `benchmark-100/results/` as its default output directory. The shell script preserves previous results and creates a new directory on each invocation. Explicit output directories must be new; existing directories are rejected. Run from the repository root when supplying the manifest directly: its paths are relative to the working directory. `--check` checks input presence and box options, not complete map contents or hardware compatibility. A completed user-run 100-case benchmark, including all 300 backend runs, is published in the [2026-10-09 report](../docs/benchmarks/2026-10-09/REPORT.md), with figures and per-case measurements.
+The script builds the release binary and selects the manifest, one trial per case/backend, and a fresh dated directory under `benchmarks/runs/100-case/` as its default output directory. The shell script preserves previous results and creates a new directory on each invocation. Explicit output directories must be new; existing directories are rejected. Run from the repository root when supplying the manifest directly: its paths are relative to the working directory. `--check` checks input presence and box options, not complete map contents or hardware compatibility. A completed user-run 100-case benchmark, including all 300 backend runs, is published in the [2026-10-09 report](results/100-case/2026-10-09/REPORT.md), with figures and per-case measurements.
 
 Outputs per pair: `results.csv`, `summary.json`, and `trial-NNN-off/on/auto.pdbqt` and `.log` files. The 100-case runner places each pair in `case-001` through `case-100` subdirectories. The terminal prints each pair's per-trial measurements and backend averages. Reports are written after each successful run; a failure stops with its log preserved. There is no automatic resume or overwrite option.
 
@@ -29,3 +29,11 @@ The manifest and 155 prepared receptor, ligand, box and affinity-map files were 
 CPU-only benchmarks work without Metal. Metal requires a compatible Mac, macOS 13+, and Apple Command Line Tools when building the helper.
 
 Official Vina's CLI cannot combine receptor and maps. For reference comparisons with a receptor, the runner ignores precomputed maps for all backends and generates maps from the same box each run. All timings therefore include map generation and final refinement. Reference version/path, per-run binary/arguments, paired speedup, signed affinity differences and direct pose RMSD are saved. Different minima can give different estimates; this is not crystal-pose accuracy or proof of identical scoring. The reference executable is checked with `--version` and must differ from the Rust binary.
+
+## Recorded results
+
+- [100-case comparison and graphs](results/100-case/2026-10-09/REPORT.md)
+- [Map-preparation performance review](results/performance/2026-10-09/README.md)
+- [Fixture validation measurements](results/validation/)
+
+Raw runs are local and ignored under `runs/`. Recorded JSON arguments retain their original execution paths as provenance.

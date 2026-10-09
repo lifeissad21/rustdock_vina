@@ -338,10 +338,12 @@ impl Cache {
             self.grids[needed[0]].data.dim2(),
         );
 
-        for x in 0..dimensions.0 {
+        let mut affinities = vec![0.0; needed.len()];
+        // X is contiguous in Array3d; reuse scratch storage across grid points.
+        for z in 0..dimensions.2 {
             for y in 0..dimensions.1 {
-                for z in 0..dimensions.2 {
-                    let mut affinities = vec![0.0; needed.len()];
+                for x in 0..dimensions.0 {
+                    affinities.fill(0.0);
                     let probe_coords = self.grids[needed[0]].index_to_argument(x, y, z);
                     for i in ig.possibilities(probe_coords) {
                         let atom = &model.grid_atoms()[*i];
@@ -489,6 +491,72 @@ mod tests {
         assert_eq!(canonical_xs_map_type(XS_TYPE_C_H_CG0), Some(XS_TYPE_C_H));
         assert_eq!(canonical_xs_map_type(XS_TYPE_G0), None);
         assert_eq!(convert_xs_to_string(XS_TYPE_C_H), "C_H");
+    }
+
+    #[test]
+    fn populated_maps_match_direct_pair_sums_at_every_point() {
+        use crate::common::{vec_distance_sqr, MAX_FL};
+        use crate::scoring_function::{ScoringFunction, ScoringFunctionChoice};
+
+        let dims = [
+            GridDim::new(-2.5, 1.5, 4),
+            GridDim::new(1.0, 4.0, 3),
+            GridDim::new(-1.0, 1.0, 2),
+        ];
+        let atoms = [
+            (XS_TYPE_C_H, Vec3::new(0.2, 2.2, 0.1)),
+            (XS_TYPE_O_A, Vec3::new(-1.1, 1.3, -0.7)),
+            (XS_TYPE_C_H, Vec3::new(8.0, 3.0, 0.0)),
+        ]
+        .into_iter()
+        .map(|(xs, coords)| {
+            let mut atom = Atom::default();
+            atom.base.atom_type.xs = xs;
+            atom.coords = coords;
+            atom
+        })
+        .collect();
+        let model = FakeModel {
+            atoms,
+            coords: vec![],
+            minus_forces: vec![],
+        };
+        let scoring = ScoringFunction::new(
+            ScoringFunctionChoice::Vina,
+            vec![
+                -0.035579, -0.005156, 0.840245, -0.035069, -0.587439, 50.0, 0.05846,
+            ],
+        );
+        let p = Precalculate::new(&scoring, MAX_FL, 4.0);
+        let mut cache = Cache::with_dims(dims, 0.0);
+        let types = [XS_TYPE_C_H, XS_TYPE_O_A];
+        cache.populate(&model, &p, &types);
+        for t in types {
+            let grid = cache.grid_for_type(t).unwrap();
+            for z in 0..grid.data.dim2() {
+                for y in 0..grid.data.dim1() {
+                    for x in 0..grid.data.dim0() {
+                        let coords = grid.index_to_argument(x, y, z);
+                        let mut expected = 0.0;
+                        for atom in &model.atoms {
+                            let r2 = vec_distance_sqr(atom.coords, coords);
+                            if r2 <= p.cutoff_sqr() {
+                                expected +=
+                                    p.eval_fast(p.index_permissive(atom.base.atom_type.xs, t), r2);
+                            }
+                        }
+                        assert_eq!(
+                            *grid.data.get(x, y, z),
+                            expected,
+                            "type {t}, point ({x}, {y}, {z})"
+                        );
+                    }
+                }
+            }
+        }
+        let populated = cache.clone();
+        cache.populate(&model, &p, &types);
+        assert_eq!(cache, populated);
     }
 
     #[test]

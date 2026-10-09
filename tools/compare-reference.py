@@ -43,7 +43,7 @@ def main():
     parser.add_argument(
         "--report",
         type=Path,
-        default=ROOT / "docs" / "porting" / "regression-results.json",
+        default=ROOT / "benchmarks" / "results" / "validation" / "regression-results.json",
     )
     parser.add_argument(
         "--full-docking",
@@ -147,14 +147,14 @@ def main():
                 f"{name}: official={scores['official']:.3f}, Rust={scores['rust']:.3f}, delta={delta:.3f}",
                 flush=True,
             )
-    report = dict(
-        reference_version=subprocess.check_output(
+    report = {
+        "reference_version": subprocess.check_output(
             [str(options.reference.resolve()), "--version"], text=True
         ).strip(),
-        seed=42,
-        cpu=2,
-        results=results,
-    )
+        "seed": 42,
+        "cpu": 2,
+        "results": results,
+    }
     options.report.parent.mkdir(parents=True, exist_ok=True)
     options.report.write_text(json.dumps(report, indent=2) + "\n")
     if not all(case["passed"] for case in results):

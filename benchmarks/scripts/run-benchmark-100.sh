@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
-cd "$(dirname "$0")/.."
-benchmark_arguments=(--manifest benchmark-100/manifest.json)
+cd "$(dirname "$0")/../.."
+benchmark_arguments=(--manifest benchmarks/datasets/dude-100/manifest.json)
 benchmark_has_dir=false
 benchmark_has_trials=false
 for argument in "$@"; do
@@ -11,8 +11,8 @@ for argument in "$@"; do
   esac
 done
 if ! "$benchmark_has_dir"; then
-  mkdir -p benchmark-100/results
-  benchmark_arguments+=(--benchmark-dir "benchmark-100/results/run-$(date +%Y%m%d-%H%M%S)-$$")
+  mkdir -p benchmarks/runs/100-case
+  benchmark_arguments+=(--benchmark-dir "benchmarks/runs/100-case/run-$(date +%Y%m%d-%H%M%S)-$$")
 fi
 if ! "$benchmark_has_trials"; then
   benchmark_arguments+=(--trials 1)

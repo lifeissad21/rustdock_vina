@@ -52,12 +52,12 @@ def main():
             assert text.count("MODEL ") >= 1 and text.count("ENDMDL") == text.count(
                 "MODEL "
             )
-            results[name] = dict(
-                wall_seconds=elapsed,
-                best_affinity=score,
-                stdout=process.stdout,
-                stderr=process.stderr,
-            )
+            results[name] = {
+                "wall_seconds": elapsed,
+                "best_affinity": score,
+                "stdout": process.stdout,
+                "stderr": process.stderr,
+            }
             print(f"{name}: {elapsed:.3f} s, {score:.3f} kcal/mol", flush=True)
             return text
 
@@ -68,8 +68,13 @@ def main():
         off = run("limited_cpu", "off", ["--max_evals", "2000"])
         assert run("auto_fallback", "auto", ["--max_evals", "2000"]) == off
         assert "using CPU" in results["auto_fallback"]["stderr"]
-    report = dict(exhaustiveness=args.exhaustiveness, seed=42, cpu=8, results=results)
-    (ROOT / "docs/porting/metal-results.json").write_text(
+    report = {
+        "exhaustiveness": args.exhaustiveness,
+        "seed": 42,
+        "cpu": 8,
+        "results": results,
+    }
+    (ROOT / "benchmarks/results/validation/metal-results.json").write_text(
         json.dumps(report, indent=2) + "\n"
     )
 

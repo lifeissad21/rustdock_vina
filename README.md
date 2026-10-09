@@ -8,19 +8,19 @@ A native Rust AutoDock Vina engine with a CLI, Python API and optional Apple Met
 
 100 ligand cases across five targets, 300 runs. Eight CPU threads, exhaustiveness 8, one pose and one trial per backend/case. Timings include startup, map generation, search and refinement.
 
-| Backend | Total time (s) | Mean / case (s) | Speedup vs Vina | Mean absolute affinity difference (kcal/mol) | Median pose RMSD (Å) |
-|---|---:|---:|---:|---:|---:|
-| Official Vina 1.2.7 | 814.28 | 8.14 | 1.00× | — | — |
-| Rust CPU | 835.95 | 8.36 | 0.97× | 0.062 | 0.118 |
-| Rust Metal | 598.87 | 5.99 | 1.36× | 0.104 | 0.178 |
+| Backend             | Total time (s) | Mean / case (s) | Speedup vs Vina | Mean absolute affinity difference (kcal/mol) | Median pose RMSD (Å) |
+| ------------------- | -------------: | --------------: | --------------: | -------------------------------------------: | -------------------: |
+| Official Vina 1.2.7 |         814.28 |            8.14 |           1.00× |                                            — |                    — |
+| Rust CPU            |         835.95 |            8.36 |           0.97× |                                        0.062 |                0.118 |
+| Rust Metal          |         598.87 |            5.99 |           1.36× |                                        0.104 |                0.178 |
 
 Affinity and pose differences are relative to official Vina's best prediction, not experimental accuracy. This is one run on one Mac; speedup is the ratio of total times.
 
-![Mean docking time by target](docs/benchmarks/2026-10-09/runtime.png)
+![Mean docking time by target](benchmarks/results/100-case/2026-10-09/runtime.png)
 
-![Rust affinity estimates compared with official Vina](docs/benchmarks/2026-10-09/affinity.png)
+![Rust affinity estimates compared with official Vina](benchmarks/results/100-case/2026-10-09/affinity.png)
 
-[Full report and pose-RMSD graph](docs/benchmarks/2026-10-09/REPORT.md) · [300 measurements](docs/benchmarks/2026-10-09/results.csv) · [Protocol and provenance](docs/benchmarks/2026-10-09/summary.json)
+[Full report and pose-RMSD graph](benchmarks/results/100-case/2026-10-09/REPORT.md) · [300 measurements](benchmarks/results/100-case/2026-10-09/results.csv)
 
 ## Build and dock
 
@@ -38,7 +38,7 @@ Use `--metal off` for CPU (default), `on` to require Metal, or `auto` for CPU fa
 All 100 included cases:
 
 ```sh
-./tools/run-benchmark-100.sh \
+./benchmarks/scripts/run-benchmark-100.sh \
   --reference-vina /path/to/official/vina \
   --cpu 8 --exhaustiveness 8 --num_modes 1 --seed 20260717 --trials 1
 ```
@@ -54,4 +54,15 @@ One receptor–ligand pair:
 
 The Rust benchmark tool reports timing, affinity differences and pose RMSD, and saves CSV/JSON, poses and logs. The shell script creates a new results folder per run. Use `--backends off,on` to compare only Rust CPU and Metal.
 
-[Python API, experimental controls and validation](docs/USAGE.md) · [Benchmark instructions](benchmark-100/README.md) · [Port status and limits](docs/porting/COMPLETE_PORT_STATUS.md)
+[Python API, experimental controls and validation](docs/USAGE.md) · [Benchmark instructions](benchmarks/README.md) · [Port status and limits](docs/porting/COMPLETE_PORT_STATUS.md)
+
+## Project layout
+
+- `crates/`: Rust engine, CLI, benchmark tool and pose splitter.
+- `python/`: Python API and packaging.
+- `benchmarks/`: datasets, runner scripts and published measurements.
+- `docs/`: usage and porting documentation.
+- `tools/`: validation utilities.
+- `reference/`: vendored upstream source and fixtures.
+
+Local benchmark runs live in ignored `benchmarks/runs/`; docking experiments live in ignored `outputs/`.

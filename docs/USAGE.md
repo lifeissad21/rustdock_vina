@@ -60,7 +60,7 @@ PYTHONPATH=python uv run --no-project --with numpy python -m unittest discover -
 python3 tools/compare-reference.py --full-docking
 ```
 
-On the tested Apple M3, 1IEP at exhaustiveness 8 took 34.18 seconds on CPU (8 threads) and 12.74 seconds with Metal, including map preparation and Rust refinement. Metal repeated identically with seed 42; automatic fallback matched CPU output exactly. This is one workload, not a general speed guarantee. [Recorded Metal results](porting/metal-results.json).
+On the tested Apple M3, 1IEP at exhaustiveness 8 took 34.18 seconds on CPU (8 threads) and 12.74 seconds with Metal, including map preparation and Rust refinement. Metal repeated identically with seed 42; automatic fallback matched CPU output exactly. This is one workload, not a general speed guarantee. [Recorded Metal results](../benchmarks/results/validation/metal-results.json).
 
 Run `python3 tools/check-metal.py --exhaustiveness 8` on a Mac with GPU access to repeat the hardware check. Run heavy fixture tests serially to reduce map memory use. The comparison harness needs an official Vina executable only for validation. Score/local examples match official Vina 1.2.7 to 0.001 kcal/mol. Stochastic searches diverge: see [port status](porting/COMPLETE_PORT_STATUS.md) and the recorded comparison results for limits. `Ported` means compiled implementation, not proof of every scientific edge case.
 
@@ -70,10 +70,10 @@ The benchmark runner is a separate Rust crate (`rustdock-vina-benchmark`); no Bu
 
 ```sh
 ./target/release/vina-benchmark \
-  --receptor benchmark-100/prepared/ampc/receptor.pdbqt \
-  --ligand benchmark-100/prepared/ampc/ligands/01_308.pdbqt \
-  --config benchmark-100/prepared/ampc/receptor.box.txt \
-  --maps benchmark-100/prepared/ampc/maps/affinity \
+  --receptor benchmarks/datasets/dude-100/prepared/ampc/receptor.pdbqt \
+  --ligand benchmarks/datasets/dude-100/prepared/ampc/ligands/01_308.pdbqt \
+  --config benchmarks/datasets/dude-100/prepared/ampc/receptor.box.txt \
+  --maps benchmarks/datasets/dude-100/prepared/ampc/maps/affinity \
   --reference-vina ../vina-multicore-benchmark/bin/vina \
   --trials 5 --backends vina,off,on --cpu 8 --exhaustiveness 8 \
   --num_modes 9 --seed 20260717 --benchmark-dir benchmark-results
@@ -83,7 +83,7 @@ The benchmark runner is a separate Rust crate (`rustdock-vina-benchmark`); no Bu
 
 The command prints per-trial timing, affinity differences and direct heavy-atom RMSD versus official Vina (or Rust CPU when official Vina is omitted), followed by mean timing, affinity and speedup. CSV and JSON records, individual pose files and logs are saved in a new output directory; existing directories are never overwritten. RMSD matches atom serials without alignment or symmetry correction and is not crystal-pose accuracy. Comparing stochastic outputs does not establish scientific equivalence. Use `--check` to check file presence and search-box options without docking (it does not fully validate map contents or Metal compatibility).
 
-`./tools/run-benchmark-100.sh` builds the binary and runs the same Rust command on the included 100-pair manifest, one trial per backend per pair, including official Vina by default. Use `--trials N` for repeats, `--limit 3` for three pairs, or `--check` to check inputs without docking. Each shell-script run creates a fresh dated folder under `benchmark-100/results/`, with results saved by case. Explicit `--benchmark-dir` paths must be new. See [benchmark instructions](../benchmark-100/README.md).
+`./benchmarks/scripts/run-benchmark-100.sh` builds the binary and runs the same Rust command on the included 100-pair manifest, one trial per backend per pair, including official Vina by default. Use `--trials N` for repeats, `--limit 3` for three pairs, or `--check` to check inputs without docking. Each shell-script run creates a fresh dated folder under `benchmarks/runs/100-case/`, with results saved by case. Explicit `--benchmark-dir` paths must be new. See [benchmark instructions](../benchmarks/README.md).
 
 The docking engine is `rustdock-vina-core`; `rustdock-vina-cli` exposes it as `vina`. The benchmark crate launches that executable for each trial, keeping runs isolated. `--engine FILE` selects another build; by default it uses `vina` beside `vina-benchmark`.
 

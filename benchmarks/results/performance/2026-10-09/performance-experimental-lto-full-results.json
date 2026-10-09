@@ -1,0 +1,362 @@
+{
+  "started_utc": "2026-10-09T17:47:45.664487+00:00",
+  "platform": "macOS-26.7.1-arm64-arm-64bit-Mach-O",
+  "repeats": 7,
+  "binaries": {
+    "before": {
+      "path": "/private/tmp/rustdock-performance/vina-before",
+      "sha256": "3dac4c9f641afe8c0648a32319aacfaf82fe93d421e3e3797fff5262ffa95849"
+    },
+    "after": {
+      "path": "/private/tmp/rustdock-performance/vina-optimized",
+      "sha256": "017015ee8fd4338b17ee42726a6f1be2514d20976f358bd02b8a92c35706690f"
+    }
+  },
+  "results": [
+    {
+      "target": "ampc",
+      "ligand": "benchmark-100/prepared/ampc/ligands/01_308.pdbqt",
+      "workload": "map-preparation",
+      "arguments": [
+        "--receptor",
+        "benchmark-100/prepared/ampc/receptor.pdbqt",
+        "--ligand",
+        "benchmark-100/prepared/ampc/ligands/01_308.pdbqt",
+        "--config",
+        "benchmark-100/prepared/ampc/receptor.box.txt",
+        "--metal",
+        "off",
+        "--cpu",
+        "1",
+        "--seed",
+        "42",
+        "--verbosity",
+        "0",
+        "--out",
+        "/var/folders/j2/03fywg0x1qbbz5drcq46s8d80000gn/T/tmpdojk6752/pose.pdbqt",
+        "--randomize_only"
+      ],
+      "seconds": {
+        "before": [
+          0.4660977499988803,
+          0.4633089159979136,
+          0.46878554199793143,
+          0.5004702500009444,
+          0.47934062499916763,
+          0.4837409159990784,
+          0.4634260419989005
+        ],
+        "after": [
+          0.4495814580004662,
+          0.4479602089995751,
+          0.4470165000020643,
+          0.45616166600302677,
+          0.4487143750011455,
+          0.44622520899793017,
+          0.4493529999999737
+        ]
+      },
+      "before_median": 0.46878554199793143,
+      "after_median": 0.4487143750011455,
+      "speedup": 1.0447303855525794,
+      "output_sha256": "53611f0f3badda42ad596ee32e14c2917db530fc01872a49f91e0efabca9cc69"
+    },
+    {
+      "target": "ampc",
+      "ligand": "benchmark-100/prepared/ampc/ligands/01_308.pdbqt",
+      "workload": "full-docking",
+      "arguments": [
+        "--receptor",
+        "benchmark-100/prepared/ampc/receptor.pdbqt",
+        "--ligand",
+        "benchmark-100/prepared/ampc/ligands/01_308.pdbqt",
+        "--config",
+        "benchmark-100/prepared/ampc/receptor.box.txt",
+        "--metal",
+        "off",
+        "--cpu",
+        "1",
+        "--seed",
+        "42",
+        "--verbosity",
+        "0",
+        "--out",
+        "/var/folders/j2/03fywg0x1qbbz5drcq46s8d80000gn/T/tmpdojk6752/pose.pdbqt",
+        "--exhaustiveness",
+        "1",
+        "--num_modes",
+        "3"
+      ],
+      "seconds": {
+        "before": [
+          1.4062863330000255,
+          1.3986900419986341,
+          1.4114347089998773,
+          1.3935475409998617,
+          1.3912124160015082,
+          1.399893540998164,
+          1.737283958998887
+        ],
+        "after": [
+          1.3816831670010288,
+          1.3850325829989742,
+          1.379396041000291,
+          1.3560694580010022,
+          1.3716481660012505,
+          1.3897178330007591,
+          1.3551835420003044
+        ]
+      },
+      "before_median": 1.399893540998164,
+      "after_median": 1.379396041000291,
+      "speedup": 1.0148597642653874,
+      "output_sha256": "9aa55ca4b7031810670d4ddf6336bae78b5a17dc628391eb201d1b1a9dd5e644"
+    },
+    {
+      "target": "cxcr4",
+      "ligand": "benchmark-100/prepared/cxcr4/ligands/01_CHEMBL1089844.pdbqt",
+      "workload": "map-preparation",
+      "arguments": [
+        "--receptor",
+        "benchmark-100/prepared/cxcr4/receptor.pdbqt",
+        "--ligand",
+        "benchmark-100/prepared/cxcr4/ligands/01_CHEMBL1089844.pdbqt",
+        "--config",
+        "benchmark-100/prepared/cxcr4/receptor.box.txt",
+        "--metal",
+        "off",
+        "--cpu",
+        "1",
+        "--seed",
+        "42",
+        "--verbosity",
+        "0",
+        "--out",
+        "/var/folders/j2/03fywg0x1qbbz5drcq46s8d80000gn/T/tmpdojk6752/pose.pdbqt",
+        "--randomize_only"
+      ],
+      "seconds": {
+        "before": [
+          0.6342659170004481,
+          0.6340659579982457,
+          0.6393662500013306,
+          0.6599227500009874,
+          0.6348962080010097,
+          0.6312104159987939,
+          0.6341130830005568
+        ],
+        "after": [
+          0.6155475839987048,
+          0.6211727080008131,
+          0.614998832999845,
+          0.6521581659981166,
+          0.629539666002529,
+          0.6315882080016308,
+          0.6264768330001971
+        ]
+      },
+      "before_median": 0.6342659170004481,
+      "after_median": 0.6264768330001971,
+      "speedup": 1.0124331556890127,
+      "output_sha256": "acfe29f43c6768534585e154f43eb8ef9a91de8bec734f25b9036fbcbaae3bc5"
+    },
+    {
+      "target": "cxcr4",
+      "ligand": "benchmark-100/prepared/cxcr4/ligands/01_CHEMBL1089844.pdbqt",
+      "workload": "full-docking",
+      "arguments": [
+        "--receptor",
+        "benchmark-100/prepared/cxcr4/receptor.pdbqt",
+        "--ligand",
+        "benchmark-100/prepared/cxcr4/ligands/01_CHEMBL1089844.pdbqt",
+        "--config",
+        "benchmark-100/prepared/cxcr4/receptor.box.txt",
+        "--metal",
+        "off",
+        "--cpu",
+        "1",
+        "--seed",
+        "42",
+        "--verbosity",
+        "0",
+        "--out",
+        "/var/folders/j2/03fywg0x1qbbz5drcq46s8d80000gn/T/tmpdojk6752/pose.pdbqt",
+        "--exhaustiveness",
+        "1",
+        "--num_modes",
+        "3"
+      ],
+      "seconds": {
+        "before": [
+          4.03805816699969,
+          11.614432166999904,
+          5.903282791998208,
+          7.376197249999677,
+          5.757575250001537,
+          3.9774926669997512,
+          3.9970473749999655
+        ],
+        "after": [
+          9.126197540997964,
+          13.850917915999162,
+          6.320634457999404,
+          7.841786125001818,
+          5.023876125000243,
+          4.882325375001528,
+          3.98192137499791
+        ]
+      },
+      "before_median": 5.757575250001537,
+      "after_median": 6.320634457999404,
+      "speedup": 0.9109172960816839,
+      "output_sha256": "92e47659192564fbfb0f2f8e00cf2bb2bc745aa45df641270ae17e86ef7c622a"
+    },
+    {
+      "target": "gcr",
+      "ligand": "benchmark-100/prepared/gcr/ligands/01_CHEMBL436848.pdbqt",
+      "workload": "map-preparation",
+      "arguments": [
+        "--receptor",
+        "benchmark-100/prepared/gcr/receptor.pdbqt",
+        "--ligand",
+        "benchmark-100/prepared/gcr/ligands/01_CHEMBL436848.pdbqt",
+        "--config",
+        "benchmark-100/prepared/gcr/receptor.box.txt",
+        "--metal",
+        "off",
+        "--cpu",
+        "1",
+        "--seed",
+        "42",
+        "--verbosity",
+        "0",
+        "--out",
+        "/var/folders/j2/03fywg0x1qbbz5drcq46s8d80000gn/T/tmpdojk6752/pose.pdbqt",
+        "--randomize_only"
+      ],
+      "seconds": {
+        "before": [
+          0.7097010840006988,
+          0.7058810830021685,
+          0.7066684999990684,
+          0.7041505000015604,
+          0.7101849589998892,
+          0.7101239170006011,
+          0.7055522910013678
+        ],
+        "after": [
+          0.6875783329996921,
+          0.6794852499988338,
+          0.6779727089997323,
+          0.6889205000006768,
+          0.6816261250023672,
+          0.680235250001715,
+          0.6785219999983383
+        ]
+      },
+      "before_median": 0.7066684999990684,
+      "after_median": 0.680235250001715,
+      "speedup": 1.0388589829728565,
+      "output_sha256": "14566a4051ecf4a34b9d59d59c51244e1eb149af0abe16c7de40998ae9eeba11"
+    },
+    {
+      "target": "gcr",
+      "ligand": "benchmark-100/prepared/gcr/ligands/01_CHEMBL436848.pdbqt",
+      "workload": "full-docking",
+      "arguments": [
+        "--receptor",
+        "benchmark-100/prepared/gcr/receptor.pdbqt",
+        "--ligand",
+        "benchmark-100/prepared/gcr/ligands/01_CHEMBL436848.pdbqt",
+        "--config",
+        "benchmark-100/prepared/gcr/receptor.box.txt",
+        "--metal",
+        "off",
+        "--cpu",
+        "1",
+        "--seed",
+        "42",
+        "--verbosity",
+        "0",
+        "--out",
+        "/var/folders/j2/03fywg0x1qbbz5drcq46s8d80000gn/T/tmpdojk6752/pose.pdbqt",
+        "--exhaustiveness",
+        "1",
+        "--num_modes",
+        "3"
+      ],
+      "seconds": {
+        "before": [
+          1.851431875002163,
+          1.8508334169964655,
+          1.8494646250001097,
+          1.8570297919977747,
+          1.8483732919994509,
+          1.852164250001806,
+          1.8605737910002063
+        ],
+        "after": [
+          1.819480709000345,
+          1.8104663330013864,
+          1.8227741250011604,
+          1.8179330409984686,
+          1.8343877500010421,
+          1.8377195829998527,
+          1.821088749999035
+        ]
+      },
+      "before_median": 1.851431875002163,
+      "after_median": 1.821088749999035,
+      "speedup": 1.0166620792112104,
+      "output_sha256": "bdb9112d7e6e88345c76023f422484faada3a80c94fe5a345985f8a53452177d"
+    },
+    {
+      "target": "hivpr",
+      "ligand": "benchmark-100/prepared/hivpr/ligands/01_CHEMBL171551.pdbqt",
+      "workload": "map-preparation",
+      "arguments": [
+        "--receptor",
+        "benchmark-100/prepared/hivpr/receptor.pdbqt",
+        "--ligand",
+        "benchmark-100/prepared/hivpr/ligands/01_CHEMBL171551.pdbqt",
+        "--config",
+        "benchmark-100/prepared/hivpr/receptor.box.txt",
+        "--metal",
+        "off",
+        "--cpu",
+        "1",
+        "--seed",
+        "42",
+        "--verbosity",
+        "0",
+        "--out",
+        "/var/folders/j2/03fywg0x1qbbz5drcq46s8d80000gn/T/tmpdojk6752/pose.pdbqt",
+        "--randomize_only"
+      ],
+      "seconds": {
+        "before": [
+          0.634738999997353,
+          0.6430847080009698,
+          0.6412025410027127,
+          0.6318355000003066,
+          0.6306656250017113,
+          0.6282389170009992,
+          0.6325049579972983
+        ],
+        "after": [
+          0.6195380829994974,
+          0.6196554170019226,
+          0.6189432499995746,
+          0.620877917001053,
+          0.6229874999989988,
+          0.6182397090015002,
+          0.6119419999995444
+        ]
+      },
+      "before_median": 0.6325049579972983,
+      "after_median": 0.6195380829994974,
+      "speedup": 1.020929907867845,
+      "output_sha256": "346cc2174ce453df16eb63d286817d76a9b9e7d1e79dd42d6594f15ae2edb5e0"
+    }
+  ]
+}
