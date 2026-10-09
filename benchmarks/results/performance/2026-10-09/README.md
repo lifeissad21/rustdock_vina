@@ -89,6 +89,17 @@ The new grid test compares both generated atom-type maps at every point against
 direct receptor-pair sums and verifies repeat population leaves maps unchanged.
 All warmup and measured preparation/docking outputs matched byte-for-byte.
 
+## Verification
+
+- `cargo fmt --all --check` passed.
+- `cargo test --workspace` passed: 108 tests across 12 suites.
+- The final release workspace build passed.
+- The official comparison harness passed all nine Vina score/local comparisons,
+  with zero differences at the reported three-decimal precision. Its existing
+  limited seeded docking difference remains: official -10.819 versus Rust
+  -8.565 kcal/mol. That observation is not an equality assertion.
+- The benchmark script compiles and its same-executable self-check passed.
+
 ## Further opportunities
 
 1. **Reuse receptor maps and scoring tables across batch ligands.** The CLI
